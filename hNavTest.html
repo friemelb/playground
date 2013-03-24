@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+
+	
+    <link href="kendoui.web/styles/kendo.common.min.css" rel="stylesheet">
+    <link href="kendoui.web/styles/kendo.default.min.css" rel="stylesheet">
+
+    <script src="kendoui.web/js/jquery.min.js"></script>
+    <script src="kendoui.web/js/kendo.web.min.js"></script>
+
+</head>
+<body>
+	<div>
+		<h1>
+			Logo Goes Here
+		</h1>
+	</div>
+	<div class="k-content">
+	            <ul id="menu">
+	                <li>
+	                    Products
+	                    <ul>
+	                        <li>
+	                            Furniture
+	                            <ul> <!-- moving the UL to the next line will cause an IE7 problem -->
+	                                <li>Tables & Chairs</li>
+	                                <li>Sofas</li>
+	                                <li>Occasional Furniture</li>
+	                                <li>Childerns Furniture</li>
+	                                <li>Beds</li>
+	                            </ul>
+	                        </li>
+	                        <li>
+	                            Decor
+	                            <ul> <!-- moving the UL to the next line will cause an IE7 problem -->
+	                                <li>Bed Linen</li>
+	                                <li>Throws</li>
+	                                <li>Curtains & Blinds</li>
+	                                <li>Rugs</li>
+	                                <li>Carpets</li>
+	                            </ul>
+	                        </li>
+	                        <li>
+	                            Storage
+	                            <ul> <!-- moving the UL to the next line will cause an IE7 problem -->
+	                                <li>Wall Shelving</li>
+	                                <li>Kids Storage</li>
+	                                <li>Baskets</li>
+	                                <li>Multimedia Storage</li>
+	                                <li>Floor Shelving</li>
+	                                <li>Toilet Roll Holders</li>
+	                                <li>Storage Jars</li>
+	                                <li>Drawers</li>
+	                                <li>Boxes</li>
+	                            </ul>
+
+	                        </li>
+	                        <li>
+	                            Lights
+	                            <ul> <!-- moving the UL to the next line will cause an IE7 problem -->
+	                                <li>Ceiling</li>
+	                                <li>Table</li>
+	                                <li>Floor</li>
+	                                <li>Shades</li>
+	                                <li>Wall Lights</li>
+	                                <li>Spotlights</li>
+	                                <li>Push Light</li>
+	                                <li>String Lights</li>
+	                            </ul>
+	                        </li>
+	                    </ul>
+	                </li>
+	                <li>
+	                    Blog
+	                </li>
+	                <li>
+	                    Company
+	                </li>
+	                <li>
+	                    Events
+	                </li>
+	                <li disabled="disabled">
+	                    News
+	                </li>
+	            </ul>
+					
+            <div id="grid">
+            </div>
+   </div>
+   <div>
+	   <a href='vNavTest.html' class="k-button">To vertical nav....</a>
+		 <a href='hBotNavTest.html' class="k-button">To horazontal bottom nav....</a>
+	   
+   </div>
+        <script>
+            $(document).ready(function() {
+				var sharedDataSource = new kendo.data.DataSource({
+				     data: [
+					 	{boardgame: "Garden Dice", type: "Dice"},
+					 	{boardgame: "Escape from Cursed Temple", type: "Dice"},
+					 	{boardgame: "Battle of the Sexes", type: "Trivia"},
+					 	{boardgame: "Life", type: "Spinner"},
+					 	{boardgame: "Roma", type: "Card"},
+					 	{boardgame: "King of Tokyo", type: "Dice"},
+					 	{boardgame: "Loyang", type: "Managment"},
+					 	{boardgame: "Munchkin Quest", type: "Card"},
+					 	{boardgame: "Agricola", type: "Managment"},
+					 	{boardgame: "Monopoly", type: "Dice"}]
+				});
+				
+				var selectHandler = function(e){
+					console.log($(e.item).children(".k-link").text());
+				};
+				
+				var gridSelectHandler = function(){
+					var selectedRows = this.select();
+					var selectedDataItems = [];
+
+					        for (var i = 0; i < selectedRows.length; i++) {
+					            var dataItem = this.dataItem(selectedRows[i]);
+
+					            selectedDataItems.push(dataItem);
+					        }
+							console.log(selectedDataItems[0].boardgame);
+				}
+				
+                $("#grid").kendoGrid({
+					selectable: "multiple",
+					height: 680,
+					change: gridSelectHandler,
+					dataSource: sharedDataSource,
+					    columns: [ 
+					               { title: "Boardgame", field: "boardgame", width: 200},
+					               { title: "Type", field: "type"} 
+								   ]
+                });
+                
+				$("#menu").kendoMenu({
+					select: selectHandler
+				});
+            });
+        </script>
+</body>
+</html>
